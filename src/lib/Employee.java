@@ -26,15 +26,12 @@ public class Employee extends Person {
 	
 	public Employee(String employeeId, String firstName, String lastName, String idNumber, String address, boolean isForeigner, boolean gender, Date dateJoined) {
 		this.employeeId = employeeId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.idNumber = idNumber;
-		this.address = address;
-		this.yearJoined = yearJoined;
-		this.monthJoined = monthJoined;
-		this.dayJoined = dayJoined;
-		this.isForeigner = isForeigner;
-		this.gender = gender;
+		super.setFirstName(firstName);
+		super.setLastName(lastName);
+		super.setIdNumber(idNumber);
+		super.setAddress(address);
+		this.setIsForeigner(isForeigner);
+		this.setGender(gender);
 		this.dateJoined = dateJoined;
 		
 		childNames = new LinkedList<String>();
@@ -55,9 +52,9 @@ public class Employee extends Person {
 			monthlySalary = 7000000;
 		}
 
-		if (isForeigner) {
-				monthlySalary = (int) (monthlySalary * 1.5);
-			}
+		if (super.getIsForeigner()) {
+			monthlySalary = (int) (monthlySalary * 1.5);
+		}
 	}
 	
 	public void setAnnualDeductible(int deductible) {	
@@ -70,7 +67,7 @@ public class Employee extends Person {
 	
 	public void setSpouse(String spouseName, String spouseIdNumber) {
 		this.spouseName = spouseName;
-		this.spouseIdNumber = idNumber;
+		this.spouseIdNumber = spouseIdNumber;
 	}
 	
 	public void addChild(String childName, String childIdNumber) {
@@ -83,8 +80,8 @@ public class Employee extends Person {
 		//Menghitung berapa lama pegawai bekerja dalam setahun ini, jika pegawai sudah bekerja dari tahun sebelumnya maka otomatis dianggap 12 bulan.
 		LocalDate date = LocalDate.now();
 		
-		if (date.getYear() == yearJoined) {
-			monthWorkingInYear = date.getMonthValue() - monthJoined;
+		if (date.getYear() == dateJoined.getYear()) {
+			monthWorkingInYear = date.getMonthValue() - dateJoined.getMonth();
 		}else {
 			monthWorkingInYear = 12;
 		}
