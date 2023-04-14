@@ -85,7 +85,13 @@ public class Employee extends Person {
 		}else {
 			monthWorkingInYear = 12;
 		}
+
+		int annualNetIncome = getAnnualIncome(monthlySalary, otherMonthlyIncome, monthWorkingInYear) - annualDeductible;
 		
-		return TaxFunction.calculateTax(monthlySalary, otherMonthlyIncome, monthWorkingInYear, annualDeductible, spouseIdNumber.equals(""), childIdNumbers.size());
+		return TaxFunction.calculateTax(annualNetIncome, spouseIdNumber.equals(""), childIdNumbers.size());
+	}
+
+	public int getAnnualIncome(int monthlySalary, int otherMonthlyIncome, int monthWorkingInYear){
+		return (monthlySalary + otherMonthlyIncome) * monthWorkingInYear;
 	}
 }
